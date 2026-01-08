@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You 🤍</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffeef3;
+        transition: 0.4s;
+        padding: 20px;
+      }
+      .card {
+        width: 100%;
+        max-width: 420px;
+        background: white;
+        border-radius: 20px;
+        padding: 24px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        animation: fade 0.6s;
+      }
+      .hidden {
+        display: none;
+      }
+      h1 {
+        margin: 0 0 8px;
+      }
+      p {
+        color: #555;
+        font-size: 0.95rem;
+      }
+      input,
+      button {
+        width: 100%;
+        padding: 14px;
+        border-radius: 999px;
+        border: 1px solid #ddd;
+        margin-top: 14px;
+        font-size: 1rem;
+      }
+      button {
+        background: #ff7aa2;
+        color: white;
+        border: none;
+      }
+      button.alt {
+        background: #ddd;
+        color: #333;
+      }
+      .progress {
+        height: 14px;
+        background: #eee;
+        border-radius: 999px;
+        overflow: hidden;
+        margin-top: 14px;
+      }
+      .bar {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #ff7aa2, #ffb3c7);
+        transition: 0.6s;
+      }
+      .small {
+        font-size: 0.85rem;
+        color: #777;
+        margin-top: 6px;
+      }
+      .chat {
+        background: #f1f1f1;
+        padding: 12px;
+        border-radius: 12px;
+        margin: 8px 0;
+        text-align: left;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .memory {
+        margin-top: 20px;
+      }
+
+      .frame {
+        aspect-ratio: 9 / 16;
+        width: 100%;
+        max-width: 280px;
+        margin: 12px auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 6px;
+        background: #eee;
+        padding: 6px;
+        border-radius: 18px;
+      }
+
+      .frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 1 LOGIN -->
+    <div class="card" id="login">
+      <h1>🔒 Login</h1>
+      <p>password = jam pap pertama</p>
+      <p>hint = 12 Desember 2025</p>
+      <input id="pw" placeholder="contoh: 22.47" />
+      <button onclick="login()">masuk</button>
+      <p id="err" class="small"></p>
+    </div>
+
+    <!-- 2 LOADING -->
+    <div class="card hidden" id="loading">
+      <h1>⏳ Membuka Kenangan</h1>
+      <p id="loadText">sebentar ya…</p>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <p class="small" id="percent">0%</p>
+    </div>
+
+    <!-- 3 QUIZ -->
+    <div class="card hidden" id="quiz">
+      <h1>🧠 Tes Receh</h1>
+      <p>lo mau masuk cepat atau buktiin?</p>
+      <p><b>warna kesukaan gue?</b></p>
+      <button onclick="failQuiz()">mantan</button>
+      <button onclick="failQuiz()">biru</button>
+      <button onclick="passQuiz()">yang kamu tau</button>
+      <button class="alt" onclick="next(4)">skip aja, kasian</button>
+    </div>
+
+    <!-- 4 KENANGAN -->
+    <div class="card hidden" id="p4">
+      <h1>📸 Kenangan Kita</h1>
+      <p class="small">jujur ya… baru ada 2 😭</p>
+
+      <!-- Kenangan 1 -->
+      <div class="memory">
+        <div class="frame">
+          <img src="assets/fotos2.jpeg" />
+          <img src="assets/fotos3.jpeg" />
+          <img src="assets/fotos4.jpeg" />
+          <img src="assets/fotos6.jpeg" />
+        </div>
+        <h3>our first date</h3>
+        <p>WWKKW duluu akuu canggung banget tau disituu</p>
+      </div>
+
+      <!-- Kenangan 2 -->
+      <div class="memory">
+        <div class="frame">
+          <img src="assets/fotos1.jpeg" />
+          <img src="assets/fotos5.jpeg" />
+          <img src="assets/fotos5.jpeg" />
+          <img src="assets/fotos1.jpeg" />
+        </div>
+        <h3>The most iconic date(?)</h3>
+        <p>
+          menurutt kuu inii sihh yang paling memorable selama kita ketemu
+          mweheheh,<br />
+          btw cakep bngt, sayang kalau ga digoda, kiw kiw 🤭
+        </p>
+      </div>
+
+      <p class="small">makanya keluar terus dong biar nambah 😭✨</p>
+      <button onclick="next(5)">lanjut</button>
+    </div>
+
+    <!-- 5 CHARACTER -->
+    <div class="card hidden" id="p5">
+      <h1>🧍‍♂️ Character Mode</h1>
+      <button onclick="alert('kamu lagi lucu. +10 charm ✨')">
+        versi lucu
+      </button>
+      <button onclick="alert('kamu manyun. critical hit ke aku 💔')">
+        versi ngeselin
+      </button>
+      <button class="alt" onclick="next(6)">lanjut</button>
+    </div>
+
+    <!-- 6 CHAT -->
+    <div class="card hidden" id="p6">
+      <h1>💬 Chat Palsu</h1>
+      <div class="chat">selamat ulang tahun ya</div>
+      <div class="chat">gue bikin ini sambil mikir kok effort amat</div>
+      <div class="chat">tapi gapapa sih</div>
+      <p class="small">scroll lagi</p>
+      <button onclick="next(11)">lanjut</button>
+    </div>
+
+    <!-- 7 KADO -->
+    <div class="card hidden" id="p7">
+      <h1>🎁 Hadiah</h1>
+      <button onclick="alert('hadiahnya aku 😌')">klik buat hadiah</button>
+      <button class="alt" onclick="next(8)">lanjut</button>
+    </div>
+
+    <!-- 8 COUNTDOWN -->
+    <div class="card hidden" id="p8">
+      <h1>⏰ Countdown</h1>
+      <p id="cd">3</p>
+      <button class="hidden" id="cdBtn" onclick="next(9)">lanjut</button>
+    </div>
+
+    <!-- 9 EASTER -->
+    <div class="card hidden" id="p9">
+      <h1 id="logo">🤍</h1>
+      <p>klik logo 5x</p>
+      <button onclick="next(10)">skip</button>
+    </div>
+
+    <!-- 10 END -->
+    <div class="card hidden" id="p10">
+      <h1>🎂</h1>
+      <p>gue ga jago ngerangkai kata</p>
+      <p>tapi kalo lo sampe sini…</p>
+      <p><b>berarti web ini berhasil</b></p>
+      <p>happy birthday ya 🤍</p>
+    </div>
+
+    <!-- 11 LITTLE YOU -->
+    <div class="card hidden" id="p11">
+      <h1>🧸 remember when u were this little?</h1>
+      <img
+        src="assets/fotom2.jpeg"
+        style="width: 100%; border-radius: 16px; margin: 12px 0"
+      />
+      <p>lucu kann??</p>
+      <button onclick="next(12)">lanjut</button>
+    </div>
+
+    <!-- 12 GROWN -->
+    <div class="card hidden" id="p12">
+      <h1>🌱 and look how much you've grown</h1>
+      <img
+        src="assets/foto3.jpeg"
+        style="width: 100%; border-radius: 16px; margin: 12px 0"
+      />
+      <p><b>little u seharusnya bangga liat kamu sekarang !!</b></p>
+      <button onclick="next(13)">lanjut</button>
+    </div>
+
+    <!-- 13 CANDLE -->
+    <div class="card hidden" id="p13">
+      <h1>🎂 tiup lilinnya</h1>
+      <div id="candles" style="font-size: 32px; margin: 16px 0">
+        🕯️ 🕯️ 🕯️ 🕯️ 🕯️
+      </div>
+      <button onclick="blow()">tiup lilin</button>
+    </div>
+
+    <!-- 14 WISH -->
+    <div class="card hidden" id="p14">
+      <h1>💌 special wishes</h1>
+
+      <p>
+        semoga kamu selalu dikelilingi hal-hal baik,<br />
+        orang-orang tulus,<br />
+        dan versi diri kamu yang makin kuat ✨
+      </p>
+
+      <p>
+        jangan lupa ya,<br />
+        <b>kamu jauh lebih berharga dari yang kamu kira.</b>
+      </p>
+
+      <p class="small">happy birthday 🤍</p>
+
+      <button onclick="restart()">ulang dari awal 🔁</button>
+    </div>
+
+    <script>
+      let historyStack = [];
+      let currentPage = "login";
+
+      const realPassword = "22.47";
+      let fail = 0,
+        clicks = 0;
+
+      function login() {
+        const v = pw.value;
+        if (v !== realPassword) {
+          fail++;
+          err.innerText = [
+            "salah. masa ini aja lupa 😔",
+            "coba inget-inget lagi deh…",
+            "bukan jam seginiii 😭",
+          ][Math.floor(Math.random() * 3)];
+          document.body.style.background = `rgb(255,${220 - fail * 20},${
+            220 - fail * 20
+          })`;
+          return;
+        }
+        next(2);
+        load();
+      }
+
+      function load() {
+        let p = 0;
+        const i = setInterval(() => {
+          if (p < 99) {
+            p += Math.random() * 25;
+            if (p > 99) p = 99;
+            bar.style.width = p + "%";
+            percent.innerText = Math.floor(p) + "%";
+          } else {
+            clearInterval(i);
+            loadText.innerText = "99%… sabar dong, kenangannya banyak 🙄";
+            setTimeout(() => next(3), 3000);
+          }
+        }, 700);
+      }
+
+      function failQuiz() {
+        alert("yah… yaudah masuk sih, kasian");
+        next(4);
+      }
+      function passQuiz() {
+        alert("ok kamu lulus 😌");
+        next(4);
+      }
+
+      function next(n) {
+        historyStack.push(currentPage);
+
+        document
+          .querySelectorAll(".card")
+          .forEach((c) => c.classList.add("hidden"));
+
+        let target = n === 2 ? "loading" : n === 3 ? "quiz" : "p" + n;
+
+        document.getElementById(target)?.classList.remove("hidden");
+        currentPage = target;
+      }
+
+      let t = 3;
+      const cdInt = setInterval(() => {
+        if (!p8.classList.contains("hidden")) {
+          cd.innerText = t--;
+          if (t < 0) {
+            cd.innerText = "sebenernya ga ada apa-apa 😭";
+            cdBtn.classList.remove("hidden");
+            clearInterval(cdInt);
+          }
+        }
+      }, 1000);
+
+      logo.onclick = () => {
+        clicks++;
+        if (clicks === 5) alert("eh kok dipencet mulu sih 😭");
+      };
+
+      let candleCount = 5;
+
+      function blow() {
+        const candles = document.getElementById("candles");
+        if (candleCount > 0) {
+          candleCount--;
+          candles.innerHTML = "🕯️ ".repeat(candleCount);
+        }
+        if (candleCount === 0) {
+          setTimeout(() => next(14), 800);
+        }
+      }
+
+      function goBack() {
+        if (historyStack.length === 0) return;
+
+        const prev = historyStack.pop();
+
+        document
+          .querySelectorAll(".card")
+          .forEach((c) => c.classList.add("hidden"));
+
+        document.getElementById(prev)?.classList.remove("hidden");
+        currentPage = prev;
+      }
+
+      function restart() {
+        historyStack = [];
+        currentPage = "login";
+        fail = 0;
+        candleCount = 5;
+        document.body.style.background = "#ffeef3";
+
+        document
+          .querySelectorAll(".card")
+          .forEach((c) => c.classList.add("hidden"));
+
+        document.getElementById("login").classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
