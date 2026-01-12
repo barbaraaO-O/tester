@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For You 🤍</title>
+    <title>Happy Birthday 🎉</title>
 
     <style>
       * {
@@ -123,7 +123,7 @@
   <body>
     <!-- 1 LOGIN -->
     <div class="card" id="login">
-      <h1>🔒 Login</h1>
+      <h1>🔒 Login duluu yaa</h1>
       <p>password = jam pap pertama</p>
       <p>hint = 12 Desember 2025</p>
       <input id="pw" placeholder="contoh: 22.47" />
@@ -133,7 +133,7 @@
 
     <!-- 2 LOADING -->
     <div class="card hidden" id="loading">
-      <h1>⏳ Membuka Kenangan</h1>
+      <h1>⏳ Loading</h1>
       <p id="loadText">sebentar ya…</p>
       <div class="progress"><div class="bar" id="bar"></div></div>
       <p class="small" id="percent">0%</p>
@@ -141,13 +141,15 @@
 
     <!-- 3 QUIZ -->
     <div class="card hidden" id="quiz">
-      <h1>🧠 Tes Receh</h1>
-      <p>lo mau masuk cepat atau buktiin?</p>
-      <p><b>warna kesukaan gue?</b></p>
-      <button onclick="failQuiz()">mantan</button>
+      <h1>🧠 Sebelum masuk test dulu</h1>
+      <p>Kalau sampe salah sih parah</p>
+      <p><b>warna kesukaan ku?</b></p>
+      <button onclick="passQuiz()">biru muda</button>
       <button onclick="failQuiz()">biru</button>
-      <button onclick="passQuiz()">yang kamu tau</button>
-      <button class="alt" onclick="next(4)">skip aja, kasian</button>
+      <button onclick="failQuiz ()">biru tua</button>
+      <button class="alt" onclick="next(4)">
+        yang bener ini mau skip?, ga mau nyoba dulu?
+      </button>
     </div>
 
     <!-- 4 KENANGAN -->
@@ -178,8 +180,8 @@
         <h3>The most iconic date(?)</h3>
         <p>
           menurutt kuu inii sihh yang paling memorable selama kita ketemu
-          mweheheh,<br />
-          btw cakep bngt, sayang kalau ga digoda, kiw kiw 🤭
+          mweheheh.<br />
+          btw ganteng, sayang kalau ga digoda, kiw kiw 🤭
         </p>
       </div>
 
@@ -189,11 +191,15 @@
 
     <!-- 5 CHARACTER -->
     <div class="card hidden" id="p5">
-      <h1>🧍‍♂️ Character Mode</h1>
-      <button onclick="alert('kamu lagi lucu. +10 charm ✨')">
+      <h1>🧍‍♂️ Kamuu tuhhh gimanaa yaaaa</h1>
+      <button
+        onclick="alert('kamu tuh jujur aga perhatian, mentally mature, kalau kata gen alpha +1000 aura')"
+      >
         versi lucu
       </button>
-      <button onclick="alert('kamu manyun. critical hit ke aku 💔')">
+      <button
+        onclick="alert('ngga ada sih, atau emng belum ketauan aja ya 🤔')"
+      >
         versi ngeselin
       </button>
       <button class="alt" onclick="next(6)">lanjut</button>
@@ -201,26 +207,36 @@
 
     <!-- 6 CHAT -->
     <div class="card hidden" id="p6">
-      <h1>💬 Chat Palsu</h1>
-      <div class="chat">selamat ulang tahun ya</div>
-      <div class="chat">gue bikin ini sambil mikir kok effort amat</div>
-      <div class="chat">tapi gapapa sih</div>
-      <p class="small">scroll lagi</p>
-      <button onclick="next(11)">lanjut</button>
+      <h1>💬 Pesan dari aku</h1>
+      <div class="chat">HAPPY BIRTHDAYYY MAMASS 🎉🥳</div>
+      <div class="chat">Semoga dengan bertambahnya umur, semakin sabar</div>
+      <div class="chat">sabar menghadapi murid murid yg ngeselin</div>
+      <div class="chat">untung aku ngga ngeselin</div>
+      <div class="chat">yaaa kann???</div>
+      <p class="small">lanjutttt 👇🏻</p>
+      <button onclick="next(7)">GASKANNNN</button>
     </div>
 
     <!-- 7 KADO -->
     <div class="card hidden" id="p7">
-      <h1>🎁 Hadiah</h1>
-      <button onclick="alert('hadiahnya aku 😌')">klik buat hadiah</button>
+      <h1>Mau tau ga apa yang ku suka?</h1>
+      <button onclick="openCamera()">Kalu mau pencett izininn yaa</button>
+
+      <video
+        id="cam"
+        autoplay
+        playsinline
+        style="width: 100%; border-radius: 16px; margin-top: 12px"
+      ></video>
+
       <button class="alt" onclick="next(8)">lanjut</button>
     </div>
 
     <!-- 8 COUNTDOWN -->
     <div class="card hidden" id="p8">
-      <h1>⏰ Countdown</h1>
-      <p id="cd">3</p>
-      <button class="hidden" id="cdBtn" onclick="next(9)">lanjut</button>
+      <h1>🤭🤭🤭🤭🤭</h1>
+      <p id="cd"></p>
+      <button class="hidden" id="cdBtn" onclick="next(11)">lanjut</button>
     </div>
 
     <!-- 9 EASTER -->
@@ -263,7 +279,7 @@
 
     <!-- 13 CANDLE -->
     <div class="card hidden" id="p13">
-      <h1>🎂 tiup lilinnya</h1>
+      <h1>🎂 EH TIUP LILINNYA</h1>
       <div id="candles" style="font-size: 32px; margin: 16px 0">
         🕯️ 🕯️ 🕯️ 🕯️ 🕯️
       </div>
@@ -291,6 +307,21 @@
     </div>
 
     <script>
+      function openCamera() {
+        navigator.mediaDevices
+          .getUserMedia({
+            video: { facingMode: "user" },
+            audio: false,
+          })
+          .then((stream) => {
+            const video = document.getElementById("cam");
+            video.srcObject = stream;
+          })
+          .catch((err) => {
+            alert("yahh kameranya ditolak 😭");
+          });
+      }
+
       let historyStack = [];
       let currentPage = "login";
 
@@ -333,11 +364,11 @@
       }
 
       function failQuiz() {
-        alert("yah… yaudah masuk sih, kasian");
+        alert("ih kok salah, parah sih, yaudah sok masuk 😒");
         next(4);
       }
       function passQuiz() {
-        alert("ok kamu lulus 😌");
+        alert("asek tau ternyata 😋");
         next(4);
       }
 
@@ -359,7 +390,7 @@
         if (!p8.classList.contains("hidden")) {
           cd.innerText = t--;
           if (t < 0) {
-            cd.innerText = "sebenernya ga ada apa-apa 😭";
+            cd.innerText = "WKWKWKWKWKWKWK   😭";
             cdBtn.classList.remove("hidden");
             clearInterval(cdInt);
           }
